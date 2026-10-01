@@ -38,6 +38,88 @@ namespace wpf_0928
                 MessageBox.Show("Több ,mint 3 karakter hosszúnak kell lennie a névnek", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return true;
-        } 
+        }
+        private bool isAgeValid()
+        {
+            string ageInput = txtAge.Text.Trim();
+            if (ageInput == "")
+            {
+                MessageBox.Show("Kérlek add meg az életkorodat!", "Hiba",MessageBoxButton.OK,MessageBoxImage.Error);
+                return false;
+            }
+            try
+            {
+                int age = int.Parse(ageInput);
+                if (age < 0 || age > 120)
+                {
+                    MessageBox.Show("Kérlek reális életkort adj meg(0 és 120 között)!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                return true;
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Az életkor csak szám lehet!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("A megadott szám túl nagy!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
+        private bool isMovieValid()
+        {
+            if (myComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Kérlek válassz egy filmet", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+            
+
+        }
+       private bool isTicketValid()
+        {
+            if (rbNormal.IsChecked == true || rbStudent.IsChecked == true || rbVIP.IsChecked == true)
+            {
+                return true;
+            
+            }
+            MessageBox.Show("Kérlek válassz egy filmet!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+
+        }
+       private bool isTicketNumberValid()
+        {
+            string tNumberInput = txtTicket.Text.Trim();
+
+            if(tNumberInput == "")
+            {
+                MessageBox.Show("Kérlek add meg a jegyek számat!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            try
+            {
+                int numberT = int.Parse(tNumberInput);
+                if (numberT < 1 || numberT > 10)
+                {
+                    MessageBox.Show("Kérlek 1-10 között add meg a jegyek számát.", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
+                return true;
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Kérlek csak számot adj meg!","Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("Megadott érték túl hosszú", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            
+        }
     }
 }
