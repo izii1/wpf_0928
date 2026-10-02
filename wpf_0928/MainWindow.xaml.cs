@@ -121,5 +121,36 @@ namespace wpf_0928
             }
             
         }
+        private int extraThings()
+        {
+            int extraPrice = 0;
+
+            if (checkPopcorn.IsChecked == true)
+            {
+                extraPrice += 1200;
+            }
+            if (checkDrink.IsChecked == true)
+            {
+                extraPrice += 800;
+            }
+            if(check3D.IsChecked == true)
+            {
+                extraPrice += 500;
+            }  
+            return extraPrice;
+        }
+        private bool isChecked()
+        {
+            if (checkAgree.IsChecked == true)
+            {
+                return true;
+
+            }
+            else
+            {
+                MessageBox.Show("Kérlek fogadd el a vásárlási feltételeket!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+        }
     }
 }
