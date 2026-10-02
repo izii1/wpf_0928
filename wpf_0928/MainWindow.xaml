@@ -130,38 +130,32 @@
                 HorizontalAlignment="Left"
                  />
             <CheckBox x:Name="checkPopcorn"
-                    Content="Popcorn (+1200Ft)"
-                    IsChecked="False"
-                    Checked="MyCheckBox_Checked"
-                    Unchecked="MyCheckBox_Unchecked"
-                    Height="30" 
-                    Width="280"
-                    Margin="0,0,0,0"/>
+          Content="Popcorn (+1200Ft)"
+          IsChecked="False"
+          Height="30" 
+          Width="280"
+          Margin="0,0,0,0"/>
+
             <CheckBox x:Name="checkDrink"
-            Content="Üditő (+800Ft)"
-            IsChecked="False"
-            Checked="MyCheckBox_Checked"
-            Unchecked="MyCheckBox_Unchecked"
-            Height="30" 
-            Width="280"
-            Margin="0,0,0,0"/>
+          Content="Üditő (+800Ft)"
+          IsChecked="False"
+          Height="30" 
+          Width="280"
+          Margin="0,0,0,0"/>
 
             <CheckBox x:Name="check3D"
-            Content="3D szemüveg (+500Ft)"
-            IsChecked="False"
-            Checked="MyCheckBox_Checked"
-            Unchecked="MyCheckBox_Unchecked"
-            Height="30" 
-            Width="280"
-            Margin="0,0,0,20"/>
+          Content="3D szemüveg (+500Ft)"
+          IsChecked="False"
+          Height="30" 
+          Width="280"
+          Margin="0,0,0,20"/>
+
             <CheckBox x:Name="checkAgree"
-                Content="Elfogadom a vásárlási feltételeket"
-                IsChecked="False"
-                Checked="MyCheckBox_Checked"
-                Unchecked="MyCheckBox_Unchecked"
-                Height="30" 
-                Width="280"
-                Margin="0,0,0,3"/>
+          Content="Elfogadom a vásárlási feltételeket"
+          IsChecked="False"
+          Height="30" 
+          Width="280"
+          Margin="0,0,0,3"/>
             <Button
                 Content="FOGLALÁS"
                 Height="30"
@@ -170,7 +164,8 @@
                 FontWeight="Bold"
                 Margin="0,0,0,15"
                 HorizontalAlignment="Center"
-                Background="LightBlue" Click="Button_Click"
+                Background="LightBlue" 
+                Click="Button_Click" 
                 />
         </StackPanel>
     </Grid>

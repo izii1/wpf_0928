@@ -20,22 +20,19 @@ namespace wpf_0928
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private bool isNameValid()
         {
-           string Name = txtName.Text.Trim();
-           
+            string Name = txtName.Text.Trim();
+
             if (Name == "")
             {
                 MessageBox.Show("Kérlek add meg a nevedet!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
             if (Name.Length < 3)
             {
                 MessageBox.Show("Több ,mint 3 karakter hosszúnak kell lennie a névnek", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
             return true;
         }
@@ -44,7 +41,7 @@ namespace wpf_0928
             string ageInput = txtAge.Text.Trim();
             if (ageInput == "")
             {
-                MessageBox.Show("Kérlek add meg az életkorodat!", "Hiba",MessageBoxButton.OK,MessageBoxImage.Error);
+                MessageBox.Show("Kérlek add meg az életkorodat!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             try
@@ -76,25 +73,26 @@ namespace wpf_0928
                 return false;
             }
             return true;
-            
+
 
         }
-       private bool isTicketValid()
+        private bool isTicketValid()
         {
             if (rbNormal.IsChecked == true || rbStudent.IsChecked == true || rbVIP.IsChecked == true)
             {
                 return true;
-            
+
             }
-            MessageBox.Show("Kérlek válassz egy filmet!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Kérlek válassz egy jegytípust!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
 
-        }
-       private bool isTicketNumberValid()
-        {
-            string tNumberInput = txtTicket.Text.Trim();
 
-            if(tNumberInput == "")
+        }
+        private bool isTicketNumberValid()
+        {
+            string tNumberInput = txtTicketCount.Text.Trim();
+
+            if (tNumberInput == "")
             {
                 MessageBox.Show("Kérlek add meg a jegyek számat!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
@@ -111,7 +109,7 @@ namespace wpf_0928
             }
             catch (FormatException)
             {
-                MessageBox.Show("Kérlek csak számot adj meg!","Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Kérlek csak számot adj meg!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             catch (OverflowException)
@@ -119,7 +117,7 @@ namespace wpf_0928
                 MessageBox.Show("Megadott érték túl hosszú", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
-            
+
         }
         private int extraThings()
         {
@@ -133,10 +131,10 @@ namespace wpf_0928
             {
                 extraPrice += 800;
             }
-            if(check3D.IsChecked == true)
+            if (check3D.IsChecked == true)
             {
                 extraPrice += 500;
-            }  
+            }
             return extraPrice;
         }
         private bool isChecked()
@@ -151,6 +149,49 @@ namespace wpf_0928
                 MessageBox.Show("Kérlek fogadd el a vásárlási feltételeket!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
+        }
+        private int ticketTypePrice()
+        {
+            if (rbStudent.IsChecked == true)
+            {
+                return 1900;
+            }
+            if (rbVIP.IsChecked == true)
+            {
+                return 4000;
+            }
+            return 2500;
+        }
+        private string getSelectedTicketType()
+        {
+            if (rbStudent.IsChecked == true) return "Diákjegy";
+            if (rbVIP.IsChecked == true) return "VIP jegy";
+            return "Normál jegy";
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isNameValid()) return;
+            if (!isAgeValid()) return;
+            if (!isMovieValid()) return;
+            if (!isTicketValid()) return;
+            if (!isTicketNumberValid()) return;
+            if (!isChecked()) return;
+
+            int ticketCount = int.Parse(txtTicketCount.Text.Trim());
+            int TotalPrice = (ticketCount * ticketTypePrice()) + extraThings();
+
+            string selectedMovie = (myComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+
+            MessageBox.Show($"Sikeres foglalás!\n" +
+                            $"Név: {txtName.Text.Trim()}\n" +
+                            $"Film: {selectedMovie}\n" +
+                            $"Jegytípus: {getSelectedTicketType()}\n" +
+                            $"Jegyek száma: {ticketCount} db\n" +
+                            $"Extrák: {extraThings()} Ft\n" +
+                            $"Fizetendő: {TotalPrice} Ft",
+                            "Foglalás visszaigazolása",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
         }
     }
 }
